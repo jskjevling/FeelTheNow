@@ -74,7 +74,7 @@ var HomePage = React.createClass({
             return;
         } else {
             this.props.onDataSubmit(userDetails);
-            hashHistory.push('/video');
+            this.props.hashHistory.push('/video');
         }
     },
     render: function () {
