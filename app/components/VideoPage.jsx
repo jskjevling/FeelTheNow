@@ -99,6 +99,7 @@ var startLoadCounter = function startLoadCounter(){
             counter--;
         } else {
             clearInterval(countInterval);
+            desc.style.color = 'green';
             desc.innerHTML = 'OK, ready to go!';
             return;
         }
