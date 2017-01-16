@@ -69,12 +69,15 @@ var HomePage = React.createClass({
         } else {
             agreeField.style.color = '';
         }
-        if (userDetails.userAge.length === 0 || userDetails.userGender.length === 0 || !emailReg.test(userDetails.userEmail) || userDetails.doesAgree === false) {
+        if (userDetails.userAge.length === 0 || userDetails.userGender.length === 0 ||  userDetails.doesAgree === false) {
+            scroll(0,0);
+            return;
+        } else if (userDetails.userEmail.length > 0 && !emailReg.test(userDetails.userEmail)) {
             scroll(0,0);
             return;
         } else {
             this.props.onDataSubmit(userDetails);
-            this.props.hashHistory.push('/video');
+            hashHistory.push('/video');
         }
     },
     render: function () {
