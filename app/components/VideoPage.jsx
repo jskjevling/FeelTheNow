@@ -32,11 +32,13 @@ var record = function record(e){
  var start = function start(e){
      e.preventDefault();
      if (counter > 0) {
+         desc.style.color = 'red';
          return;
      } else {
          coverUp.addEventListener('trainsitionend', function(){
              coverUp.style.display = 'none';
          });
+         desc.style.color = '';
          desc.style.paddingBottom = '';
          coverUp.style.opacity = '0';
          player.setMuted(false);
