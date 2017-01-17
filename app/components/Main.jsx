@@ -67,9 +67,9 @@ var Main = React.createClass({
         console.log(tempState);
         return {
             ip: ipaddress,
-            age: (tempState) ? tempState['age'] : null,
-            gender: (tempState) ? tempState['gender'] : null,
-            email: (tempState) ? tempState['email'] : null,
+            age: tempState ? tempState['age'] : null,
+            gender: tempState ? tempState['gender'] : null,
+            email: tempState ? tempState['email'] : null,
             videoID: null,
             videoLive: null,
             liveResponseBox: null,
@@ -81,7 +81,9 @@ var Main = React.createClass({
         return (
             <div className="container">
                 <Header/>
-                {React.cloneElement(this.props.children, {onDataSubmit: this.handleDataSubmit})}
+                <div className="row">
+                    {React.cloneElement(this.props.children, {onDataSubmit: this.handleDataSubmit})}
+                </div>
                 <Footer/>
             </div>
         );

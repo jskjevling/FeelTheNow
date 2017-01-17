@@ -83,8 +83,8 @@ var HomePage = React.createClass({
     render: function () {
         return (
             <div>
-                <h1>Please enter your information:</h1>
-                <p className="note">* indicates a required field</p>
+                <h1 className="text-center">Please enter your information:</h1>
+                <p className="note text-center">* indicates a required field</p>
                 <form onSubmit={this.onFormSubmit}>
                     <section className="inputs">
                         <input type="number" name="age" ref="age" min="1" max="150" placeholder="Age*"/>
@@ -94,7 +94,7 @@ var HomePage = React.createClass({
                             <option value="F">Female</option>
                         </select>
                         <input type="text" name="email" ref="email" placeholder="Email (optional)"/>
-                        <label id="agree"><span>I agree to participate in this experiment*</span><input type="checkbox" ref="agree"/></label>
+                        <label id="agree" className="text-center"><span>I agree to participate in this experiment*</span><input type="checkbox" ref="agree"/></label>
                     </section>
                     <section className="description-box">
                         <ContentBlock classes="description white large" heading={content.b1h} paragraphText={content.b1p}/>

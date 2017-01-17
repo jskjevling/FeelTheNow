@@ -3,7 +3,9 @@ var React = require('react');
 var Footer = React.createClass({
     render: function () {
         return (
-            <footer></footer>
+            <div className="row">
+                <footer className="small-12 columns"></footer>
+            </div>
         );
     }
 });
