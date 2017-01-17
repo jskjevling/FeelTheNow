@@ -8,6 +8,10 @@ var React = require('react'),
     SurveyPage = require('SurveyPage'),
     FinalPage = require('FinalPage');
 
+// Load foundation
+require('style!css!foundation-sites/dist/foundation.min.css');
+$(document).foundation();
+
 /* Render the app and set the routes */
 ReactDOM.render(
     <Router history={hashHistory}>
