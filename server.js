@@ -1,4 +1,5 @@
-var express = require('express');
+var express = require('express'),
+    fs = require('fs');
 
 // App entry point
 var app = express();
@@ -17,3 +18,13 @@ app.use(express.static('public'));
 app.listen(PORT, function() {
     console.log('Express server is up on port ' + PORT + '.');
 });
+
+var myWrite = function myWrite(data) {
+    fs.appendFile('./public/data/results.txt', data, function (err) {
+      if (err) { console.log('There was an error writing the file.') }
+    });
+};
+
+myWrite('Adding a new line\n');
+myWrite('Adding another line\n');
+myWrite('Adding this here final line\n');

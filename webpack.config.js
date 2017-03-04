@@ -46,5 +46,8 @@ module.exports = {
             }
         ]
     },
+    node: {
+        fs: 'empty'
+    },
     devtool: 'cheap-module.eval-source.map'
 };

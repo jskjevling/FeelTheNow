@@ -1,0 +1,14 @@
+
+
+The data would be stored in a text file
+IP=120.324.23.435; Age=34;Gender=M; Email=dafddfs@gmail.com; VideoID=xxxxxxx; VideoLive=Y; LiveResponseBox=R; Response=L; Feedback=“xxxxxxxxxxxxxx"
+
+IP is the IP address of the client
+Age is the age
+Gender is the gender
+Email is the optional email
+VideoID is the ID of the video that is being shown
+VideoLive is Y or N
+LiveResponseBox is the position (L for left and R for right) or the button for selecting the live video
+Response is L or R (left or right)
+Feedback is the optional text people may enter at the end
