@@ -4,7 +4,7 @@ var Header = React.createClass({
     render: function () {
         return (
             <div className="row">
-                <header className="small-12 columns"></header>
+                <header className="small-12 column"></header>
             </div>
         );
     }

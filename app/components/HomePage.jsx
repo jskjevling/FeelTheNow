@@ -47,6 +47,7 @@ var HomePage = React.createClass({
             doesAgree: this.refs.agree.checked
         };
         var emailReg = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+        /* Highlight error fields if there are any problems */
         if (userDetails.userAge.length === 0) {
             ageField.style.border = '2px solid red';
         } else {
@@ -83,27 +84,47 @@ var HomePage = React.createClass({
     render: function () {
         return (
             <div>
-                <h1 className="text-center">Please enter your information:</h1>
-                <p className="note text-center">* indicates a required field</p>
+                <div className="row">
+                    <h1 className="small-12 column text-center">Please enter your information:</h1>
+                </div>
+                <div className="row">
+                    <p className="small-12 column note text-center">* indicates a required field</p>
+                </div>
                 <form onSubmit={this.onFormSubmit}>
                     <section className="inputs">
-                        <input type="number" name="age" ref="age" min="1" max="150" placeholder="Age*"/>
-                        <select name="gender" ref="gender">
-                            <option value="">Gender*</option>
-                            <option value="M">Male</option>
-                            <option value="F">Female</option>
-                        </select>
-                        <input type="text" name="email" ref="email" placeholder="Email (optional)"/>
-                        <label id="agree" className="text-center"><span>I agree to participate in this experiment*</span><input type="checkbox" ref="agree"/></label>
+                        <div className="row">
+                            <div className="small-12 medium-4 column">
+                                <input type="number" name="age" ref="age" min="1" max="120" placeholder="Age*"/>
+                            </div>
+                            <div className="small-12 medium-4 column">
+                                <select name="gender" ref="gender">
+                                    <option value="">Gender*</option>
+                                    <option value="M">Male</option>
+                                    <option value="F">Female</option>
+                                </select>
+                            </div>
+                            <div className="small-12 medium-4 column">
+                                <input type="text" name="email" ref="email" placeholder="Email (optional)"/>
+                            </div>
+                        </div>
                     </section>
                     <section className="description-box">
-                        <ContentBlock classes="description white large" heading={content.b1h} paragraphText={content.b1p}/>
-                        <ContentBlock classes="description blue large" heading={content.b2h} paragraphText={content.b2p}/>
-                        <ContentBlock classes="description light-blue" heading={content.b3h} paragraphText={content.b3p}/>
-                        <ContentBlock classes="description dark-blue" heading={content.b4h} paragraphText={content.b4p}/>
-                        <ContentBlock classes="description white" heading={content.b5h} paragraphText={content.b5p}/>
+                        <div className="row">
+                            <ContentBlock classes="small-12 medium-6 column description white large" heading={content.b1h} paragraphText={content.b1p}/>
+                            <ContentBlock classes="small-12 medium-6 column description blue large" heading={content.b2h} paragraphText={content.b2p}/>
+                        </div>
+                        <div className="row">
+                            <ContentBlock classes="small-12 medium-6 column description light-blue" heading={content.b3h} paragraphText={content.b3p}/>
+                            <ContentBlock classes="small-12 medium-6 column description dark-blue" heading={content.b4h} paragraphText={content.b4p}/>
+                        </div>
+                        <div className="row">
+                            <ContentBlock classes="small-12 medium-6 column description white" heading={content.b5h} paragraphText={content.b5p}/>
+                        </div>
                     </section>
-                    <ButtonObject label="OK, I'm ready!"/>
+                    <div class="">
+                        <label id="agree" className="small-12 medium-6 column text-center small-centered"><span>I agree to participate in this experiment* </span><input type="checkbox" ref="agree"/></label>
+                        <ButtonObject className="small-12 medium-6 column small-centered" label="OK, I'm ready!"/>
+                    </div>
                 </form>
             </div>
         );
