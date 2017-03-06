@@ -43,29 +43,44 @@ var HomePage = React.createClass({
     /*
      * Form submission logic and error checking.
      * The email is optional, but we still check it for validity if entered.
+
+     ip: ipaddress ? ipaddress : tempState['ip'],
+     age: dataObject.userAge ? dataObject.userAge : tempState['age'],
+     gender: dataObject.userGender ? dataObject.userGender : tempState['gender'],
+     email: dataObject.userEmail ? dataObject.userEmail : tempState['email'],
+     video: dataObject.video ? dataObject.video : tempState['video'],
+     videoID: dataObject.videoID ? dataObject.videoID : tempState['videoID'],
+     videoLive: dataObject.videoLive ? dataObject.videoLive : tempState['videoLive'],
+     position: dataObject.position ? dataObject.position : tempState['position'],
+     viewers: dataObject.viewers ? dataObject.viewers : tempState['viewers'],
+     liveResponseBox: dataObject.liveResponseBox ? dataObject.liveResponseBox : tempState['liveResponseBox'],
+     response: dataObject.response ? dataObject.response : tempState['response'],
+     feedback: dataObject.feedback ? dataObject.feedback : tempState['feedback'],
+     headerOn: dataObject.headerOn,
+     footerOn:
      */
     onFormSubmit: function (e) {
         e.preventDefault();
         this.setState({ errorMessage: undefined });
         var userDetails = {
-            userAge: this.refs.age.value,
-            userGender: this.refs.gender.value,
-            userEmail: this.refs.email.value,
+            age: this.refs.age.value,
+            gender: this.refs.gender.value,
+            email: this.refs.email.value,
             doesAgree: this.refs.agree.checked
         };
         var emailReg = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
         /* Highlight error fields if there are any problems */
-        if (userDetails.userAge.length === 0) {
+        if (userDetails.age.length === 0) {
             ageField.style.border = '2px solid red';
         } else {
             ageField.style.border = '';
         }
-        if (userDetails.userGender.length === 0) {
+        if (userDetails.gender.length === 0) {
             genderField.style.border = '2px solid red';
         } else {
             genderField.style.border = '';
         }
-        if (userDetails.userEmail.length !== 0) {
+        if (userDetails.email.length !== 0) {
             if (!emailReg.test(userDetails.userEmail)) {
                 emailField.style.border = '2px solid red';
             } else {
@@ -77,10 +92,10 @@ var HomePage = React.createClass({
         } else {
             agreeField.style.color = '';
         }
-        if (userDetails.userAge.length === 0 || userDetails.userGender.length === 0 ||  userDetails.doesAgree === false) {
+        if (userDetails.age.length === 0 || userDetails.gender.length === 0 ||  userDetails.doesAgree === false) {
             this.setState({ errorMessage: 'Please check the required fields.' });
             return;
-        } else if (userDetails.userEmail.length > 0 && !emailReg.test(userDetails.userEmail)) {
+        } else if (userDetails.email.length > 0 && !emailReg.test(userDetails.email)) {
             this.setState({ errorMessage: 'Please enter a valid email address.' });
             return;
         } else {

@@ -55,22 +55,31 @@ findIP(addIP);
 /* The main module class definition */
 var Main = React.createClass({
     handleDataSubmit: function(dataObject){
+        //retrieve the app state from localStorage
         var tempState = JSON.parse(localStorage.getItem('ionsAppState'));
+        console.log('The passed dataObject:\n');
         console.log(dataObject);
+        console.log('The retreived state from localStorage:\n');
+        console.log(tempState);
         var tempObj = {
             ip: ipaddress ? ipaddress : tempState['ip'],
-            age: dataObject.userAge ? dataObject.userAge : tempState['age'],
-            gender: dataObject.userGender ? dataObject.userGender : tempState['gender'],
-            email: dataObject.userEmail ? dataObject.userEmail : tempState['email'],
+            age: dataObject.age ? dataObject.age : tempState['age'],
+            gender: dataObject.gender ? dataObject.gender : tempState['gender'],
+            email: dataObject.email ? dataObject.email : tempState['email'],
+            doesAgree: dataObject.doesAgree ? dataObject.doesAgree : tempState['doesAgree'],
             video: dataObject.video ? dataObject.video : tempState['video'],
             videoID: dataObject.videoID ? dataObject.videoID : tempState['videoID'],
             videoLive: dataObject.videoLive ? dataObject.videoLive : tempState['videoLive'],
+            position: dataObject.position ? dataObject.position : tempState['position'],
+            viewers: dataObject.viewers ? dataObject.viewers : tempState['viewers'],
             liveResponseBox: dataObject.liveResponseBox ? dataObject.liveResponseBox : tempState['liveResponseBox'],
             response: dataObject.response ? dataObject.response : tempState['response'],
             feedback: dataObject.feedback ? dataObject.feedback : tempState['feedback'],
             headerOn: dataObject.headerOn,
             footerOn: dataObject.footerOn
         };
+        console.log('And here is the tempObj after modification:\n');
+        console.log(tempObj);
         this.setState(tempObj);
         localStorage.setItem('ionsAppState', JSON.stringify(tempObj));
     },
@@ -78,15 +87,19 @@ var Main = React.createClass({
         var tempState = JSON.parse(localStorage.getItem('ionsAppState'));
         console.log(tempState);
         return {
-            ip: ipaddress,
-            age: tempState ? tempState['age'] : 'undefined',
-            gender: tempState ? tempState['gender'] : 'undefined',
-            email: tempState ? tempState['email'] : 'undefined',
-            videoID: 0,
-            videoLive: 'undefined',
-            liveResponseBox: 'undefined',
-            response: 'undefined',
-            feedback: 'undefined',
+            ip: ipaddress ? ipaddress : tempState.ip,
+            age: tempState.age ? tempState.age : 'undefined',
+            gender: tempState.gender ? tempState.gender : 'undefined',
+            email: tempState.email ? tempState.email : 'undefined',
+            doesAgree: tempState.doesAgree ? tempState.doesAgree : 'undefined',
+            video: tempState.video ? tempState.video : 'undefined',
+            videoID: tempState.videoID ? tempState.videoID : 0,
+            videoLive: tempState.videoLive ? tempState.videoLive : 'undefined',
+            position: tempState.position ? tempState.position : 'undefined',
+            viewers: tempState.viewers ? tempState.viewers : 'undefined',
+            liveResponseBox: tempState.liveResponseBox ? tempState.liveResponseBox : 'undefined',
+            response: tempState.response ? tempState.response : 'undefined',
+            feedback: tempState.feedback ? tempState.feedback : 'undefined',
             headerOn: true,
             footerOn: true
         };
