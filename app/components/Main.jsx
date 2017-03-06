@@ -87,19 +87,19 @@ var Main = React.createClass({
         var tempState = JSON.parse(localStorage.getItem('ionsAppState'));
         console.log(tempState);
         return {
-            ip: tempState.ip !== undefined ? tempState.ip : ipaddress,
-            age: tempState.age !== undefined ? tempState.age : 'undefined',
-            gender: tempState.gender !== undefined ? tempState.gender : 'undefined',
-            email: tempState.email !== undefined ? tempState.email : 'undefined',
-            doesAgree: tempState.doesAgree !== undefined ? tempState.doesAgree : 'undefined',
-            video: tempState.video !== undefined ? tempState.video : 'undefined',
-            videoID: tempState.videoID !== undefined ? tempState.videoID : 0,
-            videoLive: tempState.videoLive !== undefined ? tempState.videoLive : 'undefined',
-            position: tempState.position !== undefined ? tempState.position : 'undefined',
-            viewers: tempState.viewers !== undefined ? tempState.viewers : 'undefined',
-            liveResponseBox: tempState.liveResponseBox !== undefined ? tempState.liveResponseBox : 'undefined',
-            response: tempState.response !== undefined ? tempState.response : 'undefined',
-            feedback: tempState.feedback !== undefined ? tempState.feedback : 'undefined',
+            ip: typeof tempState.ip !== undefined ? tempState.ip : ipaddress,
+            age: typeof tempState.age !== undefined ? tempState.age : 'undefined',
+            gender: typeof tempState.gender !== undefined ? tempState.gender : 'undefined',
+            email: typeof tempState.email !== undefined ? tempState.email : 'undefined',
+            doesAgree: typeof tempState.doesAgree !== undefined ? tempState.doesAgree : 'undefined',
+            video: typeof tempState.video !== undefined ? tempState.video : 'undefined',
+            videoID: typeof tempState.videoID !== undefined ? tempState.videoID : 0,
+            videoLive: typeof tempState.videoLive !== undefined ? tempState.videoLive : 'undefined',
+            position: typeof tempState.position !== undefined ? tempState.position : 'undefined',
+            viewers: typeof tempState.viewers !== undefined ? tempState.viewers : 'undefined',
+            liveResponseBox: typeof tempState.liveResponseBox !== undefined ? tempState.liveResponseBox : 'undefined',
+            response: typeof tempState.response !== undefined ? tempState.response : 'undefined',
+            feedback: typeof tempState.feedback !== undefined ? tempState.feedback : 'undefined',
             headerOn: true,
             footerOn: true
         };
