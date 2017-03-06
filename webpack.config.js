@@ -32,7 +32,7 @@ module.exports = {
             SurveyPage: 'app/components/SurveyPage.jsx',
             FinalPage: 'app/components/FinalPage.jsx',
             ErrorModal: 'app/components/ErrorModal.jsx',
-            applicationStyles: 'app/styles/app.css'
+            applicationStyles: 'app/styles/app.scss'
         },
         extensions: ['', '.js', '.jsx']
     },
