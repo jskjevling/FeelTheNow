@@ -109,7 +109,7 @@ var HomePage = React.createClass({
                 </div>
                 <form onSubmit={this.onFormSubmit}>
                     <section className="inputs">
-                        <div className="row">
+                        <div className="row pad-sides">
                             <div className="small-12 medium-4 column">
                                 <input type="number" name="age" ref="age" min="1" max="120" placeholder="Age*"/>
                             </div>
@@ -127,24 +127,27 @@ var HomePage = React.createClass({
                     </section>
                     <section className="description-box">
                         <div className="row">
-                            <ContentBlock classes="small-12 medium-6 column description white large" heading={content.b1h} paragraphText={content.b1p}/>
-                            <ContentBlock classes="small-12 medium-6 column description blue large" heading={content.b2h} paragraphText={content.b2p}/>
+                            <ContentBlock classes="small-12 large-6 column description white large" heading={content.b1h} paragraphText={content.b1p}/>
+                            <ContentBlock classes="small-12 large-6 column description blue large" heading={content.b2h} paragraphText={content.b2p}/>
                         </div>
                         <div className="row">
-                            <ContentBlock classes="small-12 medium-6 column description light-blue" heading={content.b3h} paragraphText={content.b3p}/>
-                            <ContentBlock classes="small-12 medium-6 column description dark-blue" heading={content.b4h} paragraphText={content.b4p}/>
+                            <ContentBlock classes="small-12 large-6 column description light-blue" heading={content.b3h} paragraphText={content.b3p}/>
+                            <ContentBlock classes="small-12 large-6 column description dark-blue" heading={content.b4h} paragraphText={content.b4p}/>
                         </div>
                         <div className="row">
-                            <ContentBlock classes="small-12 medium-6 column description white" heading={content.b5h} paragraphText={content.b5p}/>
+                            <ContentBlock classes="small-12 large-6 column large-centered description white" heading={content.b5h} paragraphText={content.b5p}/>
+                        </div>
+                        <div className="row">
+                            <h3 className="small-12 large-10 column large-centered text-center">WARNING: You may be seeing videos of violent video games.</h3>
                         </div>
                     </section>
-                    <div className="row">
-                        <div className="small-12 medium-6 column text-center small-centered">
+                    <div className="row pad-20">
+                        <div className="small-12 column text-center">
                             <label id="agree"><span>I agree to participate in this experiment* </span><input type="checkbox" ref="agree"/></label>
                         </div>
                     </div>
-                    <div className="row">
-                        <div className="small-12 medium-4 column small-centered">
+                    <div className="row pad-40">
+                        <div className="small-12 medium-4 medium-centered column">
                             <ButtonObject label="OK, I'm ready!"/>
                         </div>
                     </div>

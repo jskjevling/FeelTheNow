@@ -12,6 +12,9 @@ var React = require('react'),
 require('style!css!foundation-sites/dist/foundation.min.css');
 $(document).foundation();
 
+//App css
+require('style!css!applicationStyles');
+
 /* Render the app and set the routes */
 ReactDOM.render(
     <Router history={hashHistory}>

@@ -53,11 +53,21 @@ findIP(addIP);
 /* The main module class definition */
 var Main = React.createClass({
     handleDataSubmit: function(dataObject){
+        var tempState = JSON.parse(localStorage.getItem('ionsAppState'));
         console.log(dataObject);
         var tempObj = {
-            age: dataObject.userAge,
-            gender: dataObject.userGender,
-            email: dataObject.userEmail
+            ip: ipaddress ? ipaddress : tempState['ip'],
+            age: dataObject.userAge ? dataObject.userAge : tempState['age'],
+            gender: dataObject.userGender ? dataObject.userGender : tempState['gender'],
+            email: dataObject.userEmail ? dataObject.userEmail : tempState['email'],
+            video: dataObject.video ? dataObject.video : tempState['video'],
+            videoID: dataObject.videoID ? dataObject.videoID : tempState['videoID'],
+            videoLive: dataObject.videoLive ? dataObject.videoLive : tempState['videoLive'],
+            liveResponseBox: dataObject.liveResponseBox ? dataObject.liveResponseBox : tempState['liveResponseBox'],
+            response: dataObject.response ? dataObject.response : tempState['response'],
+            feedback: dataObject.feedback ? dataObject.feedback : tempState['feedback'],
+            headerOn: dataObject.headerOn,
+            footerOn: dataObject.footerOn
         };
         this.setState(tempObj);
         localStorage.setItem('ionsAppState', JSON.stringify(tempObj));
@@ -67,24 +77,37 @@ var Main = React.createClass({
         console.log(tempState);
         return {
             ip: ipaddress,
-            age: tempState ? tempState['age'] : null,
-            gender: tempState ? tempState['gender'] : null,
-            email: tempState ? tempState['email'] : null,
-            videoID: null,
-            videoLive: null,
-            liveResponseBox: null,
-            response: null,
-            feedback: null
+            age: tempState ? tempState['age'] : 'undefined',
+            gender: tempState ? tempState['gender'] : 'undefined',
+            email: tempState ? tempState['email'] : 'undefined',
+            videoID: 0,
+            videoLive: 'undefined',
+            liveResponseBox: 'undefined',
+            response: 'undefined',
+            feedback: 'undefined',
+            headerOn: true,
+            footerOn: true
         };
     },
     render: function(){
+        var {headerOn, footerOn} = this.state;
+        function renderHeader() {
+            if (headerOn) {
+                return (<Header/>);
+            }
+        }
+        function renderFooter(){
+            if (footerOn) {
+                return (<Footer/>);
+            }
+        }
         return (
             <div className="container">
-                <Header/>
+                {renderHeader()}
                 <div className="row">
                     {React.cloneElement(this.props.children, {onDataSubmit: this.handleDataSubmit})}
                 </div>
-                <Footer/>
+                {renderFooter()}
             </div>
         );
     }

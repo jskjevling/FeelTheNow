@@ -5,26 +5,6 @@ var React = require('react'),
     {hashHistory} = require('react-router');
 
 /*
- * Method to run when selection is made, we set state here and push the next route
- * TODO: Implement set state up to Main component to capture video data
- */
-var record = function record(e){
-    e.preventDefault();
-    var userChoice = e.target.id;
-    switch (userChoice) {
-    case 'live-right':
-    case 'live-left':
-        console.log('user chose live');
-        break;
-    case 'replay-left':
-    case 'replay-right':
-        console.log('user chose replay');
-        break;
-    }
-    hashHistory.push('/survey');
-};
-
-/*
  * Method that sets up video for the timed response.  This is called by the
  * Start button in the overlay.
  */
@@ -53,10 +33,14 @@ var record = function record(e){
 
 /* Expose an options object for the Twitch code to store variables */
 var savedOptions = {
-    position: null,
-    video: null,
-    videoLive: null,
-    viewers: null
+    position: 'undefined',
+    videoID: 'undefined',
+    videoLive: 'undefined',
+    viewers: 'undefined',
+    liveResponseBox: 'undefined',
+    response: 'undefined',
+    headerOn: true,
+    footerOn: true
 };
 
 /* Small method for determining random number with even distribution */
@@ -68,7 +52,7 @@ var pickRandom = function pickRandom(min,max) {
 
 /* Instantiate the needed parameters */
 var player;
-const PLAYER_WIDTH = 854;
+const PLAYER_WIDTH = window.innerWidth > 854 ? 854 : window.innerWidth;
 const PLAYER_HEIGHT = 480;
 const IS_MUTED = true;
 /* Random number selection to pick live or recorded video */
@@ -87,10 +71,12 @@ var desc,
     countInterval;
 
 var saveOptions = function saveOptions(video, position, isLive, viewers){
-    savedOptions.video = video;
+    savedOptions.videoID = video;
     savedOptions.position = position;
     savedOptions.videoLive = isLive;
     savedOptions.viewers = viewers;
+    console.log('These are the saved options:\n');
+    console.log(savedOptions);
 };
 
 var startLoadCounter = function startLoadCounter(){
@@ -234,43 +220,88 @@ var loadRoutine = function loadRoutine(){
 
 /* The main component class */
 var VideoPage = React.createClass({
+    /*
+     * Method to run when selection is made, we set state here and push the next route
+     * TODO: Implement set state up to Main component to capture video data
+     */
+    record: function(e){
+        e.preventDefault();
+        var userChoice = e.target.id;
+        switch (userChoice) {
+        case 'live-right':
+        case 'live-left':
+            if (userChoice === 'live-right') {
+                savedOptions.liveResponseBox = 'right';
+            } else {
+                savedOptions.liveResponseBox = 'left';
+            }
+            savedOptions.response = 'live';
+            break;
+        case 'replay-left':
+        case 'replay-right':
+            if (userChoice === 'replay-left') {
+                savedOptions.liveResponseBox = 'right';
+            } else {
+                savedOptions.liveResponseBox = 'left';
+            }
+            savedOptions.response = 'replay';
+            break;
+        }
+        this.props.onDataSubmit(savedOptions);
+        hashHistory.push('/survey');
+    },
     componentDidMount: function() {
         desc = document.querySelector('#counter');
         desc.style.paddingBottom = '40px';
         coverUp = document.querySelector('#player_cover');
         liveLeft = document.querySelector('.live-left');
         liveRight = document.querySelector('.live-right');
+        this.props.onDataSubmit({ headerOn: false, footerOn: false});
         loadRoutine();
     },
     render: function () {
         return (
             <div>
-                <h1>Is this video stream live or recorded?</h1>
+                <div className="row">
+                    <h1 className="small-12 column text-center">Is this video stream live or recorded?</h1>
+                </div>
                 <section className="video">
-                    <div className="centered-player" id="player_div"></div>
-                    <div className="video-block blue large" id="player_cover">
-                        <h2>Procedure</h2>
-                        <p>You will be shown a video that is either a live video or a pre-recorded video. Based on your intuition you will indicate if you feel that the video is live or not. The idea is that live video is being viewed by thousands to millions of people, whereas recorded video is only being viewed by you. Can you feel a difference? Does one video feel more alive to you than the other? You will have 10 seconds to answer.</p>
-                        <form onSubmit={start}>
-                            <ButtonObject label="Start"/>
-                        </form>
+                    <div className="row">
+                        <div className="centered-player small-12 column text-center" id="player_div"></div>
+                        <div className="video-block dark-blue large" id="player_cover">
+                            <h2>Procedure</h2>
+                            <p>You will be shown a video that is either a live video or a pre-recorded video. Based on your intuition you will indicate if you feel that the video is live or not. The idea is that live video is being viewed by thousands to millions of people, whereas recorded video is only being viewed by you. Can you feel a difference? Does one video feel more alive to you than the other? You will have 10 seconds to answer.</p>
+                            <form onSubmit={start}>
+                                <ButtonObject label="Start"/>
+                            </form>
+                        </div>
                     </div>
-                    <p className="video-description countdown" id="counter"></p>
-                    <div className="live-left">
-                        <form onSubmit={record} id="live-left">
-                            <ButtonObject label="I think it is live"/>
-                        </form>
-                        <form onSubmit={record} id="replay-right">
-                            <ButtonObject label="I think it is a replay"/>
-                        </form>
+                    <div className="row">
+                        <p className="video-description countdown small-12 column small-centered text-center" id="counter"></p>
                     </div>
-                    <div className="live-right">
-                        <form onSubmit={record} id="replay-left">
-                            <ButtonObject label="I think it is a replay"/>
-                        </form>
-                        <form onSubmit={record} id="live-right">
-                            <ButtonObject name="live-right" label="I think it is live"/>
-                        </form>
+                    <div className="row live-left">
+                        <div className="small-6 column">
+                            <form onSubmit={this.record} id="live-left">
+                                <ButtonObject label="I think it is live"/>
+                            </form>
+                        </div>
+                        <div className="small-6 column">
+                            <form onSubmit={this.record} id="replay-right">
+                                <ButtonObject label="I think it is a replay"/>
+                            </form>
+                        </div>
+                    </div>
+                    <div className="row live-right">
+                        <div className="small-6 column">
+                            <form onSubmit={this.record} id="replay-left">
+                                <ButtonObject label="I think it is a replay"/>
+                            </form>
+                        </div>
+                        <div className="small-6 column">
+                            <form onSubmit={this.record} id="live-right">
+                                <ButtonObject name="live-right" label="I think it is live"/>
+                            </form>
+                        </div>
                     </div>
                 </section>
             </div>

@@ -31,7 +31,8 @@ module.exports = {
             VideoPage: 'app/components/VideoPage.jsx',
             SurveyPage: 'app/components/SurveyPage.jsx',
             FinalPage: 'app/components/FinalPage.jsx',
-            ErrorModal: 'app/components/ErrorModal.jsx'
+            ErrorModal: 'app/components/ErrorModal.jsx',
+            applicationStyles: 'app/styles/app.css'
         },
         extensions: ['', '.js', '.jsx']
     },
