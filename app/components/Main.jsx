@@ -87,7 +87,7 @@ var Main = React.createClass({
         var tempState = JSON.parse(localStorage.getItem('ionsAppState'));
         console.log(tempState);
         return {
-            ip: ipaddress ? ipaddress : tempState.ip,
+            ip: tempState.ip ? tempState.ip : ipaddress,
             age: tempState.age ? tempState.age : 'undefined',
             gender: tempState.gender ? tempState.gender : 'undefined',
             email: tempState.email ? tempState.email : 'undefined',
