@@ -256,7 +256,6 @@ var VideoPage = React.createClass({
         coverUp = document.querySelector('#player_cover');
         liveLeft = document.querySelector('.live-left');
         liveRight = document.querySelector('.live-right');
-        this.props.onDataSubmit({ headerOn: false, footerOn: false});
         loadRoutine();
     },
     render: function () {

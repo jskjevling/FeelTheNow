@@ -66,7 +66,9 @@ var HomePage = React.createClass({
             age: this.refs.age.value,
             gender: this.refs.gender.value,
             email: this.refs.email.value,
-            doesAgree: this.refs.agree.checked
+            doesAgree: this.refs.agree.checked,
+            headerOn: false,
+            footerOn: false
         };
         var emailReg = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
         /* Highlight error fields if there are any problems */

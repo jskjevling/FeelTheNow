@@ -56,28 +56,49 @@ findIP(addIP);
 var Main = React.createClass({
     handleDataSubmit: function(dataObject){
         //retrieve the app state from localStorage
-        var tempState = JSON.parse(localStorage.getItem('ionsAppState'));
+        var tempState = JSON.parse(localStorage.getItem('ionsAppState')),
+            tempObj;
         console.log('The passed dataObject:\n');
         console.log(dataObject);
         console.log('The retreived state from localStorage:\n');
         console.log(tempState);
-        var tempObj = {
-            ip: ipaddress ? ipaddress : tempState['ip'],
-            age: dataObject.age ? dataObject.age : tempState['age'],
-            gender: dataObject.gender ? dataObject.gender : tempState['gender'],
-            email: dataObject.email ? dataObject.email : tempState['email'],
-            doesAgree: dataObject.doesAgree ? dataObject.doesAgree : tempState['doesAgree'],
-            video: dataObject.video ? dataObject.video : tempState['video'],
-            videoID: dataObject.videoID ? dataObject.videoID : tempState['videoID'],
-            videoLive: dataObject.videoLive ? dataObject.videoLive : tempState['videoLive'],
-            position: dataObject.position ? dataObject.position : tempState['position'],
-            viewers: dataObject.viewers ? dataObject.viewers : tempState['viewers'],
-            liveResponseBox: dataObject.liveResponseBox ? dataObject.liveResponseBox : tempState['liveResponseBox'],
-            response: dataObject.response ? dataObject.response : tempState['response'],
-            feedback: dataObject.feedback ? dataObject.feedback : tempState['feedback'],
-            headerOn: dataObject.headerOn,
-            footerOn: dataObject.footerOn
-        };
+        if (tempState) {
+            tempObj = {
+                ip: ipaddress ? ipaddress : tempState['ip'],
+                age: dataObject.age ? dataObject.age : tempState['age'],
+                gender: dataObject.gender ? dataObject.gender : tempState['gender'],
+                email: dataObject.email ? dataObject.email : tempState['email'],
+                doesAgree: dataObject.doesAgree ? dataObject.doesAgree : tempState['doesAgree'],
+                video: dataObject.video ? dataObject.video : tempState['video'],
+                videoID: dataObject.videoID ? dataObject.videoID : tempState['videoID'],
+                videoLive: dataObject.videoLive ? dataObject.videoLive : tempState['videoLive'],
+                position: dataObject.position ? dataObject.position : tempState['position'],
+                viewers: dataObject.viewers ? dataObject.viewers : tempState['viewers'],
+                liveResponseBox: dataObject.liveResponseBox ? dataObject.liveResponseBox : tempState['liveResponseBox'],
+                response: dataObject.response ? dataObject.response : tempState['response'],
+                feedback: dataObject.feedback ? dataObject.feedback : tempState['feedback'],
+                headerOn: dataObject.headerOn,
+                footerOn: dataObject.footerOn
+            };
+        } else {
+            tempObj = {
+                ip: ipaddress,
+                age: dataObject.age ? dataObject.age : 'undefined',
+                gender: dataObject.gender ? dataObject.gender : 'undefined',
+                email: dataObject.email ? dataObject.email : 'undefined',
+                doesAgree: dataObject.doesAgree ? dataObject.doesAgree : false,
+                video: dataObject.video ? dataObject.video : 'undefined',
+                videoID: dataObject.videoID ? dataObject.videoID : 'undefined',
+                videoLive: dataObject.videoLive ? dataObject.videoLive : 'undefined',
+                position: dataObject.position ? dataObject.position : 'undefined',
+                viewers: dataObject.viewers ? dataObject.viewers : 'undefined',
+                liveResponseBox: dataObject.liveResponseBox ? dataObject.liveResponseBox : 'undefined',
+                response: dataObject.response ? dataObject.response : 'undefined',
+                feedback: dataObject.feedback ? dataObject.feedback : 'undefined',
+                headerOn: dataObject.headerOn,
+                footerOn: dataObject.footerOn
+            };
+        }
         console.log('And here is the tempObj after modification:\n');
         console.log(tempObj);
         this.setState(tempObj);
