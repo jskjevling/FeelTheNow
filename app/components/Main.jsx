@@ -87,19 +87,19 @@ var Main = React.createClass({
         var tempState = JSON.parse(localStorage.getItem('ionsAppState'));
         console.log(tempState);
         return {
-            ip: ipaddress,
-            age: tempState.age ? tempState.age : 'undefined',
-            gender: tempState.gender ? tempState.gender : 'undefined',
-            email: tempState.email ? tempState.email : 'undefined',
-            doesAgree: tempState.doesAgree ? tempState.doesAgree : 'undefined',
-            video: tempState.video ? tempState.video : 'undefined',
-            videoID: tempState.videoID ? tempState.videoID : 0,
-            videoLive: tempState.videoLive ? tempState.videoLive : 'undefined',
-            position: tempState.position ? tempState.position : 'undefined',
-            viewers: tempState.viewers ? tempState.viewers : 'undefined',
-            liveResponseBox: tempState.liveResponseBox ? tempState.liveResponseBox : 'undefined',
-            response: tempState.response ? tempState.response : 'undefined',
-            feedback: tempState.feedback ? tempState.feedback : 'undefined',
+            ip: tempState.ip !== undefined ? tempState.ip : ipaddress,
+            age: tempState.age !== undefined ? tempState.age : 'undefined',
+            gender: tempState.gender !== undefined ? tempState.gender : 'undefined',
+            email: tempState.email !== undefined ? tempState.email : 'undefined',
+            doesAgree: tempState.doesAgree !== undefined ? tempState.doesAgree : 'undefined',
+            video: tempState.video !== undefined ? tempState.video : 'undefined',
+            videoID: tempState.videoID !== undefined ? tempState.videoID : 0,
+            videoLive: tempState.videoLive !== undefined ? tempState.videoLive : 'undefined',
+            position: tempState.position !== undefined ? tempState.position : 'undefined',
+            viewers: tempState.viewers !== undefined ? tempState.viewers : 'undefined',
+            liveResponseBox: tempState.liveResponseBox !== undefined ? tempState.liveResponseBox : 'undefined',
+            response: tempState.response !== undefined ? tempState.response : 'undefined',
+            feedback: tempState.feedback !== undefined ? tempState.feedback : 'undefined',
             headerOn: true,
             footerOn: true
         };
