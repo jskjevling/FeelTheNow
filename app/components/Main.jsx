@@ -86,23 +86,43 @@ var Main = React.createClass({
     getInitialState: function () {
         var tempState = JSON.parse(localStorage.getItem('ionsAppState'));
         console.log(tempState);
-        return {
-            ip: typeof tempState.ip !== undefined ? tempState.ip : ipaddress,
-            age: typeof tempState.age !== undefined ? tempState.age : 'undefined',
-            gender: typeof tempState.gender !== undefined ? tempState.gender : 'undefined',
-            email: typeof tempState.email !== undefined ? tempState.email : 'undefined',
-            doesAgree: typeof tempState.doesAgree !== undefined ? tempState.doesAgree : 'undefined',
-            video: typeof tempState.video !== undefined ? tempState.video : 'undefined',
-            videoID: typeof tempState.videoID !== undefined ? tempState.videoID : 0,
-            videoLive: typeof tempState.videoLive !== undefined ? tempState.videoLive : 'undefined',
-            position: typeof tempState.position !== undefined ? tempState.position : 'undefined',
-            viewers: typeof tempState.viewers !== undefined ? tempState.viewers : 'undefined',
-            liveResponseBox: typeof tempState.liveResponseBox !== undefined ? tempState.liveResponseBox : 'undefined',
-            response: typeof tempState.response !== undefined ? tempState.response : 'undefined',
-            feedback: typeof tempState.feedback !== undefined ? tempState.feedback : 'undefined',
-            headerOn: true,
-            footerOn: true
-        };
+        if (tempState) {
+            return {
+                ip: tempState.ip ? tempState.ip : ipaddress,
+                age: tempState.age ? tempState.age : 'undefined',
+                gender: tempState.gender ? tempState.gender : 'undefined',
+                email: tempState.email ? tempState.email : 'undefined',
+                doesAgree: tempState.doesAgree ? tempState.doesAgree : 'undefined',
+                video: tempState.video ? tempState.video : 'undefined',
+                videoID: tempState.videoID ? tempState.videoID : 0,
+                videoLive: tempState.videoLive ? tempState.videoLive : 'undefined',
+                position: tempState.position ? tempState.position : 'undefined',
+                viewers: tempState.viewers ? tempState.viewers : 'undefined',
+                liveResponseBox: tempState.liveResponseBox ? tempState.liveResponseBox : 'undefined',
+                response: tempState.response ? tempState.response : 'undefined',
+                feedback: tempState.feedback ? tempState.feedback : 'undefined',
+                headerOn: true,
+                footerOn: true
+            };
+        } else {
+            return {
+                ip: ipaddress,
+                age: 'undefined',
+                gender: 'undefined',
+                email: 'undefined',
+                doesAgree: 'undefined',
+                video: 'undefined',
+                videoID: 0,
+                videoLive: 'undefined',
+                position: 'undefined',
+                viewers: 'undefined',
+                liveResponseBox: 'undefined',
+                response: 'undefined',
+                feedback: 'undefined',
+                headerOn: true,
+                footerOn: true
+            };
+        }
     },
     render: function(){
         var {headerOn, footerOn} = this.state;
