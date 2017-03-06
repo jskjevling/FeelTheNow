@@ -1,6 +1,7 @@
 var React = require('react'),
     ButtonObject = require('ButtonObject'),
     ContentBlock = require('ContentBlock'),
+    ErrorModal = require('ErrorModal'),
     {hashHistory} = require('react-router');
 
 var ageField,
@@ -24,6 +25,11 @@ var content = {
 };
 
 var HomePage = React.createClass({
+    getInitialState: function () {
+        return {
+            errorMessage: undefined
+        };
+    },
     /*
      * We need to grab a few page elements, so we wait to ensure the component has
      * mounted before doing so. Otherwise the values may be undefined.
@@ -40,6 +46,7 @@ var HomePage = React.createClass({
      */
     onFormSubmit: function (e) {
         e.preventDefault();
+        this.setState({ errorMessage: undefined });
         var userDetails = {
             userAge: this.refs.age.value,
             userGender: this.refs.gender.value,
@@ -71,10 +78,10 @@ var HomePage = React.createClass({
             agreeField.style.color = '';
         }
         if (userDetails.userAge.length === 0 || userDetails.userGender.length === 0 ||  userDetails.doesAgree === false) {
-            scroll(0,0);
+            this.setState({ errorMessage: 'Please check the required fields.' });
             return;
         } else if (userDetails.userEmail.length > 0 && !emailReg.test(userDetails.userEmail)) {
-            scroll(0,0);
+            this.setState({ errorMessage: 'Please enter a valid email address.' });
             return;
         } else {
             this.props.onDataSubmit(userDetails);
@@ -82,6 +89,16 @@ var HomePage = React.createClass({
         }
     },
     render: function () {
+        var {errorMessage} = this.state;
+
+        function renderError() {
+            if (typeof errorMessage === 'string') {
+                return (
+                    <ErrorModal message={errorMessage}/>
+                );
+            }
+        }
+
         return (
             <div>
                 <div className="row">
@@ -121,11 +138,18 @@ var HomePage = React.createClass({
                             <ContentBlock classes="small-12 medium-6 column description white" heading={content.b5h} paragraphText={content.b5p}/>
                         </div>
                     </section>
-                    <div class="">
-                        <label id="agree" className="small-12 medium-6 column text-center small-centered"><span>I agree to participate in this experiment* </span><input type="checkbox" ref="agree"/></label>
-                        <ButtonObject className="small-12 medium-6 column small-centered" label="OK, I'm ready!"/>
+                    <div className="row">
+                        <div className="small-12 medium-6 column text-center small-centered">
+                            <label id="agree"><span>I agree to participate in this experiment* </span><input type="checkbox" ref="agree"/></label>
+                        </div>
+                    </div>
+                    <div className="row">
+                        <div className="small-12 medium-4 column small-centered">
+                            <ButtonObject label="OK, I'm ready!"/>
+                        </div>
                     </div>
                 </form>
+                {renderError()}
             </div>
         );
     }

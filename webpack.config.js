@@ -30,7 +30,8 @@ module.exports = {
             HomePage: 'app/components/HomePage.jsx',
             VideoPage: 'app/components/VideoPage.jsx',
             SurveyPage: 'app/components/SurveyPage.jsx',
-            FinalPage: 'app/components/FinalPage.jsx'
+            FinalPage: 'app/components/FinalPage.jsx',
+            ErrorModal: 'app/components/ErrorModal.jsx'
         },
         extensions: ['', '.js', '.jsx']
     },

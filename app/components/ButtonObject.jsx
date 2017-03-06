@@ -11,7 +11,7 @@ var ButtonObject = React.createClass({
         var label = this.props.label;
         var click = this.props.click;
         return (
-            <button className="button">{label}</button>
+            <button className="button expanded">{label}</button>
         );
     }
 });
